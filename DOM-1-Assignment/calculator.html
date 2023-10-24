@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Calculator</title>
+</head>
+<body>
+    <input type="number" id="num1" placeholder="Enter 1st number">
+    <input type="number" id="num2" placeholder="Enter 2nd number">
+    <button onclick="Addition()" id="Add">Add</button>
+    <button onclick="Subtraction()" id="Sub">Subtract</button>
+    <button onclick="Division()" id="Div">Divide</button>
+    <button onclick="Multiplication()" id="Mul">Multiply</button>
+</body>
+</html>
+<script>
+    
+    function Addition(){
+        let inp1=parseFloat(document.getElementById("num1").value)
+        let inp2=parseFloat(document.getElementById("num2").value)
+        alert(inp1 + inp2)
+    }
+
+    function Subtraction(){
+        let inp1=parseFloat(document.getElementById("num1").value)
+        let inp2=parseFloat(document.getElementById("num2").value)
+        alert(inp1 - inp2)
+    }
+
+    function Division(){
+        let inp1=parseFloat(document.getElementById("num1").value)
+        let inp2=parseFloat(document.getElementById("num2").value)
+        if(inp2 === 0){
+            alert(" Invalid Input: Division by 0 is not possible")
+        }
+        else{
+            alert(inp1 / inp2)
+        }    
+    }
+
+    function Multiplication(){
+        let inp1=parseFloat(document.getElementById("num1").value)
+        let inp2=parseFloat(document.getElementById("num2").value)
+        alert(inp1 * inp2)
+    }
+
+</script>
