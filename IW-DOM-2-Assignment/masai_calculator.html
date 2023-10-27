@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masai Calculator</title>
+    <style>
+        *{
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #main{
+            border: 2px solid red ;
+            border: 0;
+            width: 30%;
+            margin: auto;
+            margin-top: 5%;
+        }
+        #header>h1{
+            color: #00807F;
+            text-align: center;
+            font-size: 50px;
+        }
+        .parent{
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            display: grid; 
+            width: 70%;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: repeat(5,60px); 
+            gap: 10px;
+            padding: 40px;
+            margin: auto;
+            flex-wrap: wrap;
+        }
+        .parent>div{
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            border-radius: 10px;
+        }
+        button{
+            width:100%;
+            height: 100%;
+            background-color: white;
+            border: 0;
+            border-radius: 10px;
+        }
+        button:active {
+            background-color: #191f1a;
+            box-shadow: 0 5px #171717;
+        }
+        #display{
+            font-size: 2rem;
+            padding: 5px;
+            grid-column-start: 1;
+            grid-column-end: 5;
+            overflow:scroll;
+        }
+        #display::-webkit-scrollbar {
+            background-color: transparent; 
+        }
+        .operators{
+            background-color: black;
+            color: white;
+        }
+        #clear{
+            background-color: red; 
+            color: white;
+        }
+        #clear:active {
+            background-color: red;
+            box-shadow: 0 5px red;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+    <div id="header">
+        <h1>Masai Calculator</h1>
+    </div>
+    <div class="parent">
+        <div id="display"></div>
+        <div><button class="btn">1</button></div>
+        <div><button class="btn">2</button></div>
+        <div><button class="btn">3</button></div>
+        <div><button class="operators" >+</button></div>
+        <div><button class="btn">4</button></div>
+        <div><button class="btn">5</button></div>
+        <div><button class="btn">6</button></div>
+        <div><button class="operators" >-</button></div>
+        <div><button class="btn">7</button></div>
+        <div><button class="btn">8</button></div>
+        <div><button class="btn">9</button></div>
+        <div><button class="operators" >x</button></div>
+        <div><button id="clear">C</button></div>
+        <div><button class="btn">0</button></div>
+        <div><button id="equal" >=</button></div>
+        <div><button class="operators" >/</button></div>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
+<script>
+    let keypad = document.querySelectorAll('.btn');
+    let operators = document.querySelectorAll('.operators');
+    let head = document.getElementById("display");
+    let IsFirstNumber = true;
+    let opt = "";
+    let firstNumber = "";
+    let secondNumber = "";
+    let equal = document.getElementById("equal");
+    equal.addEventListener('click',function(){
+        head.innerText = calculate(firstNumber,secondNumber,opt);
+    })
+    for(let i = 0; i < keypad.length; i++){
+        keypad[i].addEventListener('click',function(){
+            if(IsFirstNumber == true){
+                firstNumber += keypad[i].innerText 
+                head.innerText = firstNumber;
+            }
+            else{
+                secondNumber += keypad[i].innerText 
+                head.innerText = secondNumber;
+            }
+        })
+    }
+    for(let i = 0; i < operators.length; i++){
+        operators[i].addEventListener('click',function(){
+            IsFirstNumber = false;
+            opt = operators[i].innerText;  
+        })
+    }
+function calculate(firstNumber,secondNumber,opt){
+    switch(opt){
+        case "+" :
+            return Number(firstNumber) + Number(secondNumber) ;
+        case "-" :
+            return Number(firstNumber) - Number(secondNumber) ;
+        case "x" :
+            return Number(firstNumber) * Number(secondNumber) ;
+        case "/" :
+            return Number(firstNumber) / Number(secondNumber) ;     
+    }
+}
+let clearButton = document.getElementById("clear");
+clearButton.addEventListener('click', function() {
+    firstNumber = "";
+    secondNumber = "";
+    opt = "";
+    head.innerText = "";
+    IsFirstNumber = true;
+});
+</script>
